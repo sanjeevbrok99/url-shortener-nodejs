@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 const UrlSchema = new mongoose.Schema({
     urlId: {
       type: String,

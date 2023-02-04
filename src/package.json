@@ -12,8 +12,7 @@
     "express": "^4.18.2",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
-    "nanoid": "^4.0.0",
-    "shortid": "^2.2.16"
+    "nanoid": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
