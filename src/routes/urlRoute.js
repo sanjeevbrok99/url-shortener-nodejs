@@ -3,7 +3,12 @@ import {
     shortUrl,
     redirectUrl
   } from "../controllers/urlController.js";
+  import {validator } from '../middlewares/validator.js';
+  import {
+    urlShortenerValidation
+  } from "../validators/Url.js";
+
 const router = express.Router();
-router.route("/createShortUrl").post(shortUrl);
-router.route("/redirect/url").get(redirectUrl);
+router.route("/createShortUrl").post(validator(urlShortenerValidation),shortUrl);
+router.route("/redirect/:urlId").get(redirectUrl);
 export default router;

@@ -20,8 +20,7 @@ export const shortUrl=  async (req, res) => {
           url = new Url({
             origUrl,
             shortUrl,
-            urlId,
-            date: new Date(),
+            urlId,           
           });
   
           await url.save();
@@ -42,8 +41,12 @@ export const shortUrl=  async (req, res) => {
       const url = await Url.findOne({ urlId: req.params.urlId });
       console.log(url)
       if (url) {
-        url.clicks++;
-        url.save();
+        await Url.updateOne(
+            {
+              urlId: req.params.urlId,
+            },
+            { $inc: { clicks: 1 } }
+          );
         return res.redirect(url.origUrl);
       } else res.status(404).json("Not found");
     } catch (err) {
