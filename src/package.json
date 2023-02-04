@@ -14,7 +14,8 @@
     "joi": "^17.7.0",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
-    "nanoid": "^4.0.0"
+    "nanoid": "^4.0.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

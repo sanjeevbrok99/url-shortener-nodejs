@@ -1,15 +1,16 @@
 import Url from "../models/Url.js";
 import  {validateUrl}  from '../utils/util.js';
+import validUrl from 'valid-url'
 import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
 // URL shortener endpoint
 export const shortUrl=  async (req, res) => {
-    console.log("HERE",req.body.url);
     const { origUrl } = req.body;
     const base = process.env.BASE;
   
     const urlId = nanoid();
-    if (!validateUrl(origUrl)) {
+    if (validUrl.isUri(origUrl)) {
+        console.log(validUrl.isUri(origUrl))
       try {
         let url = await Url.findOne({ origUrl });
         if (url) {
