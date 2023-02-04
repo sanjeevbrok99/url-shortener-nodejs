@@ -1,5 +1,5 @@
 import Url from "../models/Url.js";
-import { validateUrl } from '../utils/util.js';
+import  {validateUrl}  from '../utils/util.js';
 import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
 // URL shortener endpoint
@@ -9,7 +9,7 @@ export const shortUrl=  async (req, res) => {
     const base = process.env.BASE;
   
     const urlId = nanoid();
-    if (utils.validateUrl(origUrl)) {
+    if (!validateUrl(origUrl)) {
       try {
         let url = await Url.findOne({ origUrl });
         if (url) {
@@ -37,13 +37,14 @@ export const shortUrl=  async (req, res) => {
   
   // redirect endpoint
   export const redirectUrl =  async (req, res) => {
+    const { urlId } = req.params;
     try {
-      const url = await Url.findOne({ urlId: req.params.urlId });
+      const url = await Url.findOne({ urlId });
       console.log(url)
       if (url) {
         await Url.updateOne(
             {
-              urlId: req.params.urlId,
+              urlId: urlId,
             },
             { $inc: { clicks: 1 } }
           );
